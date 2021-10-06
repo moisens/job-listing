@@ -1,0 +1,14 @@
+header {
+  width: 100%;
+  height: 80px;
+  background-color: hsl(180, 29%, 50%);
+
+  img {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: cover;
+    background-position-y: top;
+  }
+}
