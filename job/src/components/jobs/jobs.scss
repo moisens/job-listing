@@ -4,4 +4,96 @@
   background-color: hsl(180, 52%, 96%);
   padding: 60px 100px 200px 100px;
   
+  
+}
+
+.job-list-container {
+  display: flex;
+  justify-content: space-between;
+  background-color: hsl(0, 0%, 100%);
+  border-radius: 6px;
+  box-shadow: 0px 7px 8px 0px hsl(180, 98%, 16%, 0.116);
+  padding: 30px 30px;
+  
+  &.active-job {
+    border-left: solid 4px hsl(180, 8%, 52%);
+  }
+
+  .position-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    .logo-company {
+      width: 90px;
+      height: 90px;
+      background-color: rgb(1, 66, 71);
+      border-radius: 50%;
+    }
+    .position-content {
+      //background-color: lightblue;
+
+      .company {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding-bottom: 10px;
+
+        .company-name {
+          color: hsl(180, 96%, 29%);
+          font-weight: 700;
+        }
+        .company-new {
+          background-color: hsl(180, 96%, 29%);
+          padding: 6px 8px 3px;
+          color: #fff;
+          border-radius: 20px;
+        }
+        .company-featured {
+          background-color: hsl(180, 96%, 10%);
+          padding: 6px 8px 3px;
+          color: #fff;
+          border-radius: 20px;
+        }
+      }
+
+      .position-title {
+        font-weight: 700;
+        padding-bottom: 10px;
+
+        &:hover {
+          color: hsl(180, 96%, 29%);
+          cursor: pointer;
+        }
+      }
+      .position-infos {
+        display: flex;
+        gap: 5px;
+        color: hsl(180, 8%, 52%);
+        font-weight: 500;
+        font-size: 0.844rem;
+      }
+    }
+
+  }
+
+  .position-categories-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    .categories-bgColor {
+      background-color: hsla(180, 46%, 87%, 0.431);
+      color: hsl(180, 96%, 29%);
+      font-weight: 700;
+      padding: 6px 8px 4px;
+      border-radius: 6px;
+
+      &.active-category {
+        background-color: hsl(180, 96%, 29%);
+        color: #fff;
+      }
+    }
+  }
+
 }
