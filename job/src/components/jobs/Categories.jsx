@@ -1,20 +1,78 @@
-const Categories = ({ role, level, languages, tools }) => {
+const Categories = ({
+  id,
+  role,
+  level,
+  languages,
+  tools,
+  jobs,
+  addToFilteredCategories,
+}) => {
   return (
     <div className="position-categories-container">
-      <p className="categories-bgColor">{role}</p>
-      <p className="categories-bgColor">{level}</p>
+      <button
+        className="categories-bgColor"
+        onClick={() => {
+          addToFilteredCategories(
+            <button className="categories-bgColor" key={id}>
+              {role}
+              <span className="delete">x</span>
+            </button>
+          );
+        }}
+      >
+        {role}
+      </button>
+      <button
+        className="categories-bgColor"
+        onClick={() => {
+          addToFilteredCategories(
+            <button className="categories-bgColor" key={id}>
+              {level}
+              <span className="delete">x</span>
+            </button>
+          );
+        }}
+      >
+        {level}
+      </button>
       {languages.map((language, index) => {
         return (
-          <p className="categories-bgColor" key={index}>{language}</p>
-        )
+          <button
+            className="categories-bgColor"
+            key={index}
+            onClick={() => {
+              addToFilteredCategories(
+                <button className="categories-bgColor" key={id}>
+                  {language}
+                  <span className="delete">x</span>
+                </button>
+              );
+            }}
+          >
+            {language}
+          </button>
+        );
       })}
       {tools.map((tool, index) => {
         return (
-          <p className="categories-bgColor" key={index}>{tool}</p>
-        )
+          <button
+            className="categories-bgColor"
+            key={index}
+            onClick={() => {
+              addToFilteredCategories(
+                <button className="categories-bgColor" key={id}>
+                  {tool}
+                  <span className="delete">x</span>
+                </button>
+              );
+            }}
+          >
+            {tool}
+          </button>
+        );
       })}
     </div>
-  )
-}
+  );
+};
 
 export default Categories;
