@@ -11,7 +11,7 @@ const Position = ({
   return (
     <div className="position-container">
       <div className="logo-company">
-        <img src={logo} alt={company} title={company}  />
+        <img src="" alt={company} title={company}  />
       </div>
       <div className="position-content">
         <div className="company">
