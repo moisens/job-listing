@@ -3,6 +3,7 @@ import data from "../../data/data.json";
 import Position from "./Position";
 import Categories from "./Categories";
 import { useState } from "react";
+import { FaTrash } from 'react-icons/fa';
 
 const Jobs = () => {
   const [jobs, setJobs] = useState(data);
@@ -13,9 +14,18 @@ const Jobs = () => {
     setFilteredCategories([...filteredCategories, category]);
   };
 
+  const clearFilteredCategories = () => {
+    setFilteredCategories([]);
+  }
+
   return (
     <div className="container">
-      <div className="filtered-categories isVisible">{filteredCategories}</div>
+      <div className="filtered-categories isVisible">
+        {filteredCategories}
+        <div onClick={clearFilteredCategories}>
+          <FaTrash color='hsl(180, 96%, 29%)' size='22px' />
+        </div>
+      </div>
       <div className="jobs-container">
         {jobs.map((job, index) => {
           const {
