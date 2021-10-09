@@ -3,33 +3,47 @@ import data from "../../data/data.json";
 import Position from "./Position";
 import Categories from "./Categories";
 import { useState } from "react";
-import { FaTrash } from 'react-icons/fa';
+
 
 const Jobs = () => {
   const [jobs, setJobs] = useState(data);
   const [filteredCategories, setFilteredCategories] = useState([]);
-  console.log(jobs);
+  
 
   const addToFilteredCategories = (category) => {
     setFilteredCategories([...filteredCategories, category]);
+    
   };
+
+  const deleteCategory = (e) => {
+    const newFileteredCategory = [...filteredCategories];
+    let content = e.target.parentElement.parentElement.textContent;
+    let index = newFileteredCategory.findIndex(element => element === content);
+    newFileteredCategory.splice(index, 1);
+    setFilteredCategories(newFileteredCategory);
+  }
 
   const clearFilteredCategories = () => {
     setFilteredCategories([]);
   }
 
+
+
+
+
   return (
     <div className="container">
-      <div className="filtered-categories isVisible">
+      <div className={filteredCategories.length === 0 ? "filtered-categories" : "filtered-categories isVisible"}>
         {filteredCategories}
-        <div onClick={clearFilteredCategories}>
-          <FaTrash color='hsl(180, 96%, 29%)' size='22px' />
+        <div className='clear-btn' onClick={clearFilteredCategories}>
+          Clear
         </div>
       </div>
       <div className="jobs-container">
-        {jobs.map((job, index) => {
+        {jobs.map(job => {
           const {
             id,
+            index,
             company,
             logo,
             news,
@@ -57,12 +71,15 @@ const Jobs = () => {
               />
               <Categories
                 id={id}
+                index={index}
                 role={role}
                 level={level}
                 languages={languages}
                 tools={tools}
                 jobs={jobs}
                 addToFilteredCategories={addToFilteredCategories}
+                deleteCategory={deleteCategory}
+                
               />
             </div>
           );
