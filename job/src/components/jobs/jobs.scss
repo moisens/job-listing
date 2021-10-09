@@ -10,20 +10,53 @@
 
 .filtered-categories {
   width: 80.5%;
-  height: 40px;
+  padding: 15px 40px;
   background-color: #fff;
   position: absolute;
-  top: -20px;
+  top: -30px;
   left: 140px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  border-radius: 7px;
+  border-radius: 6px;
   box-shadow: 0px 7px 8px 0px hsl(180, 98%, 16%, 0.116);
   display: none;
 
   &.isVisible {
     display: block;
+  }
+
+  .clear-btn {
+    color: hsl(180, 96%, 29%);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  .categories-bgColor {
+    background-color: hsla(180, 46%, 87%, 0.431);
+    color: hsl(180, 96%, 29%);
+    font-weight: 700;
+    //padding: 6px 8px 4px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 20px;
+
+  .detele-category {
+    background-color: hsl(180, 96%, 29%);
+    color: #fff;
+    margin-left: 10px;
+    width: 20px;
+    height: 20px;
+
+    &:hover {
+      background-color: hsl(180, 100%, 3%);
+      color: #fff;
+    }
+  }
   }
 
 }
@@ -136,11 +169,12 @@
       border-radius: 6px;
       cursor: pointer;
 
-      &.active-category {
+      &:hover {
         background-color: hsl(180, 96%, 29%);
         color: #fff;
       }
     }
+    
   }
 
 }
