@@ -16,8 +16,8 @@ const Position = ({
       <div className="position-content">
         <div className="company">
           <p className="company-name">{company}</p>
-          <p className="company-new">{news ? "NEW!" : null}</p>
-          <p className="company-featured">{featured ? "FEATURED" : null}</p>
+          <p className={news ? 'company-new new' : 'company-new'}>{news ? "NEW!" : null}</p>
+          <p className={featured ? 'company-featured new' : 'company-featured'}>{featured ? "FEATURED" : null}</p>
         </div>
         <p className="position-title">{position}</p>
         <div className="position-infos">

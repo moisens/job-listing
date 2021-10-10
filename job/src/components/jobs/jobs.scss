@@ -118,13 +118,14 @@
           color: #fff;
           font-size: 0.75rem;
           border-radius: 20px;
-          //display: none;
+          display: none;
 
+          &.new {
+            display: block;
+          }
           
         }
-        .new {
-          display: block;
-        }
+        
 
         .company-featured {
           background-color: hsl(180, 96%, 10%);
@@ -132,6 +133,11 @@
           color: #fff;
           font-size: 0.75rem;
           border-radius: 20px;
+          display: none;
+
+          &.new {
+            display: block;
+          }
         }
       }
 
