@@ -4,46 +4,59 @@ import Position from "./Position";
 import Categories from "./Categories";
 import { useState } from "react";
 
-
 const Jobs = () => {
   const [jobs, setJobs] = useState(data);
   const [filteredCategories, setFilteredCategories] = useState([]);
-  
 
   const addToFilteredCategories = (category) => {
     setFilteredCategories([...filteredCategories, category]);
-    
   };
 
   const deleteCategory = (e) => {
     const newFileteredCategory = [...filteredCategories];
     let content = e.target.parentElement.parentElement.textContent;
-    let index = newFileteredCategory.findIndex(element => element === content);
-    newFileteredCategory.splice(index, 1);
+    let index = newFileteredCategory.findIndex(
+      (element) => element === content
+    );
+    console.log("index: ", index);
+    newFileteredCategory.slice(index, 1);
+    console.log("newFileteredCategory: ", newFileteredCategory);
     setFilteredCategories(newFileteredCategory);
-  }
+  };
 
   const clearFilteredCategories = () => {
     setFilteredCategories([]);
-  }
+  };
 
-
-
-
+  const filterJobs = (category) => {
+    const newJobs = jobs.filter((job) => {
+      if (job.role === category || job.level === category) {
+        return job;
+      }
+      
+    });
+    setJobs(newJobs);
+    console.log("newJobs: ", newJobs);
+  };
 
   return (
     <div className="container">
-      <div className={filteredCategories.length === 0 ? "filtered-categories" : "filtered-categories isVisible"}>
+      <div
+        className={
+          filteredCategories.length === 0
+            ? "filtered-categories"
+            : "filtered-categories isVisible"
+        }
+      >
         {filteredCategories}
-        <div className='clear-btn' onClick={clearFilteredCategories}>
+        <div className="clear-btn" onClick={clearFilteredCategories}>
           Clear
         </div>
       </div>
       <div className="jobs-container">
-        {jobs.map(job => {
+        {jobs.map((job) => {
           const {
             id,
-            index,
             company,
             logo,
             news,
@@ -71,7 +84,6 @@ const Jobs = () => {
               />
               <Categories
                 id={id}
-                index={index}
                 role={role}
                 level={level}
                 languages={languages}
@@ -79,7 +91,7 @@ const Jobs = () => {
                 jobs={jobs}
                 addToFilteredCategories={addToFilteredCategories}
                 deleteCategory={deleteCategory}
-                
+                filterJobs={filterJobs}
               />
             </div>
           );
