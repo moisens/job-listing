@@ -2,7 +2,6 @@ import { FaTimes } from "react-icons/fa";
 
 const Categories = ({
   id,
-  index,
   role,
   level,
   languages,
@@ -10,6 +9,8 @@ const Categories = ({
   jobs,
   addToFilteredCategories,
   deleteCategory,
+  filterJobs
+
 }) => {
   return (
     <div className="position-categories-container">
@@ -24,9 +25,27 @@ const Categories = ({
               <FaTimes className="detele-category" onClick={deleteCategory} />
             </button>
           );
+          filterJobs(role)
         }}
       >
         {role}
+      </button>
+      {/*End Role btn*/}
+      {/*Role btn*/}
+      <button
+        type="button"
+        className="categories-bgColor"
+        onClick={() => {
+          addToFilteredCategories(
+            <button type="button" className="categories-bgColor" key={id}>
+              {level}
+              <FaTimes className="detele-category" onClick={deleteCategory} />
+            </button>
+          );
+          filterJobs(level)
+        }}
+      >
+        {level}
       </button>
       {/*End Role btn*/}
 
@@ -51,6 +70,7 @@ const Categories = ({
                   />
                 </button>
               );
+              filterJobs(lang)
             }}
           >
             {lang}
@@ -79,6 +99,7 @@ const Categories = ({
                   />
                 </button>
               );
+              filterJobs(tool)
             }}
           >
             {tool}
