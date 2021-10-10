@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { FaTimes } from "react-icons/fa";
 
 const Categories = ({
   id,
+  index,
   role,
   level,
   languages,
@@ -12,101 +14,53 @@ const Categories = ({
   filterJobs
 
 }) => {
+
   return (
     <div className="position-categories-container">
       {/*Role btn*/}
       <button
         type="button"
         className="categories-bgColor"
-        onClick={() => {
-          addToFilteredCategories(
-            <button type="button" className="categories-bgColor" key={id}>
-              {role}
-              <FaTimes className="detele-category" onClick={deleteCategory} />
-            </button>
-          );
-          filterJobs(role)
-        }}
+        onClick={() => {addToFilteredCategories(role)}}
       >
         {role}
       </button>
       {/*End Role btn*/}
-      {/*Role btn*/}
+      {/*Level btn*/}
       <button
         type="button"
         className="categories-bgColor"
-        onClick={() => {
-          addToFilteredCategories(
-            <button type="button" className="categories-bgColor" key={id}>
-              {level}
-              <FaTimes className="detele-category" onClick={deleteCategory} />
-            </button>
-          );
-          filterJobs(level)
-        }}
+        onClick={() => {addToFilteredCategories(level)}}
       >
         {level}
       </button>
-      {/*End Role btn*/}
-
-      {/*Languages btn*/}
+      {/*End level btn*/}
+      {/*languages btn*/}
       {languages.map((lang, index) => {
         return (
-          <button
-            type="button"
-            className="categories-bgColor"
-            key={index}
-            onClick={() => {
-              addToFilteredCategories(
-                <button
-                  type="button"
-                  className="categories-bgColor"
-                  key={index}
-                >
-                  {lang}
-                  <FaTimes
-                    className="detele-category"
-                    onClick={deleteCategory}
-                  />
-                </button>
-              );
-              filterJobs(lang)
-            }}
-          >
-            {lang}
-          </button>
-        );
+          <div key={index}>
+            <button 
+              type="button" 
+              className='categories-bgColor' 
+              onClick={() => {addToFilteredCategories(lang)}}
+            >{lang}</button>
+          </div>
+        )
       })}
-      {/*End Languages btn*/}
-      {/*Tools btn*/}
+      {/*End languages btn*/}
+      {/*tools btn*/}
       {tools.map((tool, index) => {
         return (
-          <button
-            type="button"
-            className="categories-bgColor"
-            key={index}
-            onClick={() => {
-              addToFilteredCategories(
-                <button
-                  type="button"
-                  className="categories-bgColor"
-                  key={index}
-                >
-                  {tool}
-                  <FaTimes
-                    className="detele-category"
-                    onClick={deleteCategory}
-                  />
-                </button>
-              );
-              filterJobs(tool)
-            }}
-          >
-            {tool}
-          </button>
-        );
+          <div key={index}>
+            <button 
+              type="button" 
+              className='categories-bgColor' 
+              onClick={() => {addToFilteredCategories(tool)}}
+            >{tool}</button>
+          </div>
+        )
       })}
-      {/*End Tools btn*/}
+      {/*End languages btn*/}
     </div>
   );
 };
