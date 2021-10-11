@@ -9,14 +9,32 @@ const Jobs = () => {
   const [jobs, setJobs] = useState(data);
   const [filteredCategories, setFilteredCategories] = useState([]);
 
+  const filterAndAdd = (category) => {
+    filterJobs(category);
+    addToFilteredCategories(category);
+
+  }
+
   const filterJobs = (category) => {
     const newJobs = jobs.filter((job) => {
+      const newlang = job.languages.map(lang => {
+        if (lang === category) {
+          return job;
+        }
+      });
+      console.log(newlang);
+
       if (job.role === category || job.level === category) {
         return job;
+      } else if (newlang === category) {
+        return newlang;
       }
+      
+      
+      
     });
     setJobs(newJobs);
-    //console.log("newJobs: ", newJobs);
+    console.log("newJobs: ", newJobs);
   };
 
   const getrandomId = (min, max) => {
@@ -32,28 +50,20 @@ const Jobs = () => {
         </button>
       </div>
     );
+
+
     setFilteredCategories([...filteredCategories, newCategory]);
-    console.log(filteredCategories);
+    //console.log(filteredCategories);
   };
 
   const clearFilteredCategories = () => {
     setFilteredCategories([]);
   };
 
-  const deleteCategory = (e) => {
+  const deleteCategory = () => {
     const newFileteredCategory = [...filteredCategories];
-    console.log(newFileteredCategory);
-    //let content = e.target.parentElement.parentElement.textContent;
-    //let index = newFileteredCategory.findIndex(
-    //  (element) => element === content
-    //);
-    //console.log("index: ", index);
-    //newFileteredCategory.slice(index, 1);
-    //console.log("newFileteredCategory: ", newFileteredCategory);
-
-    newFileteredCategory.filter((category) => {});
-
-    setFilteredCategories(newFileteredCategory);
+   
+    //setFilteredCategories([...newFileteredCategory]);
   };
 
   return (
@@ -106,10 +116,8 @@ const Jobs = () => {
                 level={level}
                 languages={languages}
                 tools={tools}
-                addToFilteredCategories={addToFilteredCategories}
                 deleteCategory={deleteCategory}
-                filterJobs={filterJobs}
-                jobs={jobs}
+                filterAndAdd={filterAndAdd}
               />
             </div>
           );
