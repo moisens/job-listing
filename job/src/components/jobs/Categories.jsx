@@ -8,10 +8,8 @@ const Categories = ({
   level,
   languages,
   tools,
-  jobs,
-  addToFilteredCategories,
+  filterAndAdd,
   deleteCategory,
-  filterJobs
 
 }) => {
 
@@ -21,7 +19,7 @@ const Categories = ({
       <button
         type="button"
         className="categories-bgColor"
-        onClick={() => {addToFilteredCategories(role)}}
+        onClick={() => {filterAndAdd(role)}}
       >
         {role}
       </button>
@@ -30,7 +28,7 @@ const Categories = ({
       <button
         type="button"
         className="categories-bgColor"
-        onClick={() => {addToFilteredCategories(level)}}
+        onClick={() => {filterAndAdd(level)}}
       >
         {level}
       </button>
@@ -42,7 +40,7 @@ const Categories = ({
             <button 
               type="button" 
               className='categories-bgColor' 
-              onClick={() => {addToFilteredCategories(lang)}}
+              onClick={() => {filterAndAdd(lang)}}
             >{lang}</button>
           </div>
         )
@@ -55,7 +53,7 @@ const Categories = ({
             <button 
               type="button" 
               className='categories-bgColor' 
-              onClick={() => {addToFilteredCategories(tool)}}
+              onClick={() => {filterAndAdd(tool)}}
             >{tool}</button>
           </div>
         )
