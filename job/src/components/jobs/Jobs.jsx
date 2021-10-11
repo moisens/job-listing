@@ -22,7 +22,7 @@ const Jobs = () => {
           return job;
         }
       });
-      console.log(newlang);
+      //console.log(newlang);
 
       if (job.role === category || job.level === category) {
         return job;
@@ -34,7 +34,8 @@ const Jobs = () => {
       
     });
     setJobs(newJobs);
-    console.log("newJobs: ", newJobs);
+    setFilteredCategories(newJobs)
+    //console.log("newJobs: ", newJobs);
   };
 
   const getrandomId = (min, max) => {
@@ -43,7 +44,7 @@ const Jobs = () => {
 
   const addToFilteredCategories = (category, id) => {
     const newCategory = (
-      <div key={getrandomId(1, 100)}>
+      <div key={getrandomId(1, 1000)}>
         <button type="button" className="categories-bgColor">
           {category}
           <FaTimes className="detele-category" onClick={deleteCategory} />
@@ -53,17 +54,29 @@ const Jobs = () => {
 
 
     setFilteredCategories([...filteredCategories, newCategory]);
-    //console.log(filteredCategories);
+    console.log(filteredCategories);
   };
 
   const clearFilteredCategories = () => {
     setFilteredCategories([]);
+    setJobs(data)
   };
 
-  const deleteCategory = () => {
+  const deleteCategory = (e) => {
+    setFilteredCategories(filterJobs())
     const newFileteredCategory = [...filteredCategories];
+    // let content = e.target.parentElement.parentElement.textContent;
+    // let index = newFileteredCategory.findIndex(ele => ele === content);
+    // newFileteredCategory.slice(index, 1)
+    // console.log(index, content);
+    // console.log('newFileteredCategory: ', newFileteredCategory);
+
+    
    
-    //setFilteredCategories([...newFileteredCategory]);
+    setFilteredCategories([...newFileteredCategory]);
+    if (filteredCategories.length <= 0) {
+      setJobs(data);
+    }
   };
 
   return (
