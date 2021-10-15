@@ -7,11 +7,12 @@ import { FaTimes } from "react-icons/fa";
 
 const Jobs = () => {
   const [jobs, setJobs] = useState(data);
-  const [filteredCategories, setFilteredCategories] = useState([]);
-  
+  const [filteredTags, setFilteredTags] = useState([]);
+  const [filtredJobs, setFiltredJobs] = useState([]);
   
   const filterAndAdd = (tag) => {
-    addToFilteredCategory(tag)
+    addToFilteredCategory(tag);
+    filterJobs(tag);
 
   }
 
@@ -26,13 +27,22 @@ const Jobs = () => {
       key={getrandomId(1,1000)}
     > {tag}<FaTimes />
     </button>
-    if (filteredCategories.includes(newtag)) return;
-    setFilteredCategories([...filteredCategories, newtag]);
     
+    setFilteredTags([...filteredTags, newtag]);
 
   }
 
-  
+
+  const filterJobs = (tag) => {
+    const newFiltredJobs = jobs.filter(job => {
+      if (job.role === tag || job.level === tag) return job;
+    })
+    setJobs(newFiltredJobs);
+  }
+
+  const clearJobs = () => {
+    setFilteredTags([]);
+  }
 
   
 
@@ -41,13 +51,15 @@ const Jobs = () => {
     <div className="container">
       <div
         className={
-          filteredCategories.length === 0
+          filteredTags.length === 0
             ? "filtered-categories"
             : "filtered-categories isVisible"
         }
       >
-        {filteredCategories}
-        <div className="clear-btn">
+        {filteredTags}
+        <div className="clear-btn"
+          onClick={clearJobs}
+        >
           Clear
         </div>
       </div>
@@ -123,17 +135,6 @@ export default Jobs;
 
 
 
-
-
-// const addToFilteredCategories = (category, id) => {
-//   const newCategory = (
-//     <div key={getrandomId(1, 1000)}>
-//       <button type="button" className="categories-bgColor">
-//         {category}
-//         {/* <FaTimes className="detele-category" onClick={deleteCategory} /> */}
-//       </button>
-//     </div>
-//   );
 
 
 //   setFilteredCategories([...filteredCategories, newCategory]);
