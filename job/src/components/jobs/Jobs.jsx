@@ -2,82 +2,40 @@ import "./jobs.scss";
 import data from "../../data/data.json";
 import Position from "./Position";
 import Categories from "./Categories";
-import { useState } from "react";
+import { useState, useEfect } from "react";
 import { FaTimes } from "react-icons/fa";
 
 const Jobs = () => {
   const [jobs, setJobs] = useState(data);
   const [filteredCategories, setFilteredCategories] = useState([]);
-
-  const filterAndAdd = (category) => {
-    filterJobs(category);
-    addToFilteredCategories(category);
+  
+  
+  const filterAndAdd = (tag) => {
+    addToFilteredCategory(tag)
 
   }
-
-  const filterJobs = (category) => {
-    const newJobs = jobs.filter((job) => {
-      const newlang = job.languages.map(lang => {
-        if (lang === category) {
-          return job;
-        }
-      });
-      //console.log(newlang);
-
-      if (job.role === category || job.level === category) {
-        return job;
-      } else if (newlang === category) {
-        return newlang;
-      }
-      
-      
-      
-    });
-    setJobs(newJobs);
-    setFilteredCategories(newJobs)
-    //console.log("newJobs: ", newJobs);
-  };
 
   const getrandomId = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
 
-  const addToFilteredCategories = (category, id) => {
-    const newCategory = (
-      <div key={getrandomId(1, 1000)}>
-        <button type="button" className="categories-bgColor">
-          {category}
-          <FaTimes className="detele-category" onClick={deleteCategory} />
-        </button>
-      </div>
-    );
-
-
-    setFilteredCategories([...filteredCategories, newCategory]);
-    console.log(filteredCategories);
-  };
-
-  const clearFilteredCategories = () => {
-    setFilteredCategories([]);
-    setJobs(data)
-  };
-
-  const deleteCategory = (e) => {
-    setFilteredCategories(filterJobs())
-    const newFileteredCategory = [...filteredCategories];
-    // let content = e.target.parentElement.parentElement.textContent;
-    // let index = newFileteredCategory.findIndex(ele => ele === content);
-    // newFileteredCategory.slice(index, 1)
-    // console.log(index, content);
-    // console.log('newFileteredCategory: ', newFileteredCategory);
-
+  const addToFilteredCategory = (tag) => {
+    const newtag = <button 
+      type="button" 
+      className="categories-bgColor" 
+      key={getrandomId(1,1000)}
+    > {tag}<FaTimes />
+    </button>
+    if (filteredCategories.includes(newtag)) return;
+    setFilteredCategories([...filteredCategories, newtag]);
     
-   
-    setFilteredCategories([...newFileteredCategory]);
-    if (filteredCategories.length <= 0) {
-      setJobs(data);
-    }
-  };
+
+  }
+
+  
+
+  
+
 
   return (
     <div className="container">
@@ -89,7 +47,7 @@ const Jobs = () => {
         }
       >
         {filteredCategories}
-        <div className="clear-btn" onClick={clearFilteredCategories}>
+        <div className="clear-btn">
           Clear
         </div>
       </div>
@@ -110,6 +68,17 @@ const Jobs = () => {
             languages,
             tools,
           } = job;
+
+          //Tags represent the role, level languages=[] and tools=[]
+          //They are passed to Categories where I iterate through...
+          const tags = [role, level];
+          if (languages) {
+            tags.push(...languages);
+          }
+          if (tools) {
+            tags.push(...tools);
+          }
+
           return (
             <div className="job-list-container" key={id}>
               <Position
@@ -123,13 +92,7 @@ const Jobs = () => {
                 location={location}
               />
               <Categories
-                id={id}
-                index={index}
-                role={role}
-                level={level}
-                languages={languages}
-                tools={tools}
-                deleteCategory={deleteCategory}
+                tags={tags}
                 filterAndAdd={filterAndAdd}
               />
             </div>
@@ -141,3 +104,43 @@ const Jobs = () => {
 };
 
 export default Jobs;
+
+
+
+// const filterJobs = (category) => {
+
+//   const newJobs = jobs.filter(job => {
+//     if (job.role === category || job.level === category) {
+//       return Object.entries(job);
+
+//     }
+//   })
+//   console.log(newJobs);
+
+//   setJobs(newJobs);
+//   //setFilteredCategories(newJobs)
+// };
+
+
+
+
+
+// const addToFilteredCategories = (category, id) => {
+//   const newCategory = (
+//     <div key={getrandomId(1, 1000)}>
+//       <button type="button" className="categories-bgColor">
+//         {category}
+//         {/* <FaTimes className="detele-category" onClick={deleteCategory} /> */}
+//       </button>
+//     </div>
+//   );
+
+
+//   setFilteredCategories([...filteredCategories, newCategory]);
+//   //console.log(filteredCategories);
+// };
+
+// const clearFilteredCategories = () => {
+//   setFilteredCategories([]);
+//   setJobs(data)
+// };
